@@ -15,25 +15,40 @@ except ImportError:
     from PyQt4.QtCore import *
     from PyQt4.QtGui import *
 
-QTextCodec.setCodecForTr(QTextCodec.codecForName("gbk"))
+'''
+Class Name: MListWidgetDialog
+Type      : QDialog
+ +-+---------------------+
+ |-|    Dialog Title     |
+ +-----------------------+
+ | Label:                |
+ | +-------------------+ |
+ | |itemList[0]        | |
+ | |itemList[1]        | |
+ | |itemList[2]        | |
+ | |...                | |
+ | |itemList[-1]       | |
+ | +-------------------+ |
+ +-----------------------+
+ | +-------+  +--------+ |
+ | |  OK   |  | Cancel | |
+ | +-------+  +--------+ |
+ +-----------------------+
+Public Method:
+    void setSingleSelectionMode() # by default
+    void setMultiSelectionMode()
+    void setDialogTitle(QString)
+    void setLabel(QString)
 
-class MHSeparator(QFrame):
-    def __init__(self, parent = None):
-        super(MHSeparator, self).__init__(parent)
-        self.setFrameShape(QFrame.HLine)
-        self.setFrameShadow(QFrame.Sunken)
-
-class MVSeparator(QFrame):
-    def __init__(self, parent = None):
-        super(MVSeparator, self).__init__(parent)
-        self.setFrameShape(QFrame.VLine)
-        self.setFrameShadow(QFrame.Plain)
+Public Signal:
+    sigSelectedItemTextList(QStringList)
+'''
 
 class MListWidgetDialog(QDialog):
     def __init__(self, itemList, parent = None):
         super(MListWidgetDialog, self).__init__(parent)
         self.setWindowTitle(self.tr('Double Click To Choose'))
-
+        self.label = QLabel('Label:')
         self.listWidget = QListWidget()
         for item in itemList:
             self.listWidget.addItem(self.tr(item))
@@ -51,9 +66,16 @@ class MListWidgetDialog(QDialog):
         butLay.addWidget(cancelButton)
 
         mainLay = QVBoxLayout()
+        mainLay.addWidget(self.label)
         mainLay.addWidget(self.listWidget)
         mainLay.addLayout(butLay)
         self.setLayout(mainLay)
+
+    def setDialogTitle(self, title):
+        self.setWindowTitle(title)
+
+    def setLabel(self, label):
+        self.label.setText(label)
 
     def setSingleSelectionMode(self):
         self.listWidget.setSelectionMode(QAbstractItemView.SingleSelection)
@@ -62,7 +84,7 @@ class MListWidgetDialog(QDialog):
         self.listWidget.setSelectionMode(QAbstractItemView.ExtendedSelection)
 
     def slotDoubleClicked(self, item):
-        self.emit(SIGNAL('selectedItemTextList(QStringList)'), [item.text(), ])
+        self.emit(SIGNAL('sigSelectedItemTextList(QStringList)'), [item.text(), ])
         self.close()
 
     def slotOK(self):
@@ -71,7 +93,7 @@ class MListWidgetDialog(QDialog):
             itemTestList = []
             for item in itemList:
                 itemTestList.append(item.text())
-            self.emit(SIGNAL('selectedItemTextList(QStringList)'), itemTestList)
+            self.emit(SIGNAL('sigSelectedItemTextList(QStringList)'), itemTestList)
             self.close()
         else:
             QMessageBox.warning(self, 'Warning', 'Please select one item at least!')
