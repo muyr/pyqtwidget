@@ -8,4 +8,6 @@
 from MListWidgetDialog import *
 from MSeparator import *
 from MTextEditDialog import *
+from MFolderWidget import *
+from MFileWidget import *
 

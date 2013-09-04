@@ -5,7 +5,7 @@
 # Email : muyanru345@163.com
 ###################################################################
 import sys
-from pyqtwidget import *
+from MPyQtWidget import *
 from testwidget import *
 
 if __name__ == '__main__':
