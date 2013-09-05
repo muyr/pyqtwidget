@@ -5,6 +5,7 @@
 # Email : muyanru345@163.com
 ###################################################################
 from MPyQtWidget import *
+import os
 
 class MTestWindow(QWidget):
     def __init__(self, parent = None):
@@ -60,12 +61,23 @@ class MTestWindow(QWidget):
         lay3.addWidget(fileWidget, 1, 1)
         lay3.addWidget(butClear2, 1, 2)
 
+        htmlTextLab = MHtmlTextLabel()
+        htmlTextLab.setLink('.')
+        htmlTextLab.setLabelText('Go To Current Dir')
+        htmlTextLab.setColor1('#ff0000')
+        htmlTextLab.setColor2('#00ff00')
+        htmlTextLab.setFontSize('13pt')
+        self.connect(htmlTextLab, SIGNAL('sigClicked(QString)'), self.slotClickHtmlTextLabel)
+
         mainLay = QVBoxLayout()
         mainLay.addLayout(lay1)
         mainLay.addWidget(MHSeparator())
         mainLay.addLayout(lay2)
+        mainLay.addWidget(MHSeparator())
         mainLay.addLayout(lay3)
-
+        mainLay.addWidget(MHSeparator())
+        mainLay.addWidget(htmlTextLab)
+        
         self.setLayout(mainLay)
 
     def slotShowListWidgetDialog(self):
@@ -95,3 +107,7 @@ class MTestWindow(QWidget):
 
     def slotChangeTextEditContent(self, content):
         self.textEdit.setDocument(QTextDocument(content))
+
+    def slotClickHtmlTextLabel(self, link):
+        if os.path.isfile(link) or os.path.isdir(link):
+            os.startfile(link)
