@@ -40,41 +40,44 @@ class MHtmlTextLabel(QLabel):
         self.fontSize = '11pt'
         self.color1 = '#ad0e3b'
         self.color2 = '#11aa90'
+        self.color = self.color1
         self.setLink(link)
         self.setLabelText(labelName)
         self.setCursor(QCursor(Qt.PointingHandCursor))
 
-
     def mouseReleaseEvent(self, event):
         if event.button() == Qt.LeftButton:
-            self.setText('<span style = "color:' + self.color2 + '; text-decoration: underline; font-size:' + self.fontSize + ';">' 
-                         + self.labelName 
-                         + '</span>')
+            self.color = self.color2
+            self.updateText()
             self.emit(SIGNAL('sigClicked(QString)'), self.link)
 
     def setLabelText(self, text):
         self.labelName = text
-        self.setText('<span style = "color:' + self.color1 + '; text-decoration: underline; font-size:' + self.fontSize + ';">' 
-                      + self.labelName 
-                      + '</span>')
+        self.updateText()
 
     def setLink(self, text):
         #self.setToolTip(text)
         self.link = text
 
-    def getLink():
+    def getLink(self):
         return self.link
 
-    def getLabelText():
+    def getLabelText(self):
         return self.labelName
 
     def setFontSize(self, size):
         self.fontSize = size
-        self.setLabelText(self.labelName)
+        self.updateText()
 
     def setColor1(self, text):
         self.color1 = text
-        self.setLabelText(self.labelName)
+        self.updateText()
 
     def setColor2(self, text):
         self.color2 = text
+        self.updateText()
+
+    def updateText(self):
+        self.setText('<span style = "color:' + self.color + '; text-decoration: underline; font-size:' + self.fontSize + ';">' 
+                      + self.labelName 
+                      + '</span>')

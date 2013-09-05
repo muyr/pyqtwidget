@@ -11,3 +11,4 @@ from MTextEditDialog import *
 from MFolderWidget import *
 from MFileWidget import *
 from MHtmlTextLabel import *
+from MDustbinButton import *

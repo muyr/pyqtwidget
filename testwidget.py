@@ -61,13 +61,20 @@ class MTestWindow(QWidget):
         lay3.addWidget(fileWidget, 1, 1)
         lay3.addWidget(butClear2, 1, 2)
 
-        htmlTextLab = MHtmlTextLabel()
-        htmlTextLab.setLink('.')
-        htmlTextLab.setLabelText('Go To Current Dir')
-        htmlTextLab.setColor1('#ff0000')
-        htmlTextLab.setColor2('#00ff00')
-        htmlTextLab.setFontSize('13pt')
-        self.connect(htmlTextLab, SIGNAL('sigClicked(QString)'), self.slotClickHtmlTextLabel)
+        self.htmlTextLab = MHtmlTextLabel()
+        self.htmlTextLab.setLink('.')
+        self.htmlTextLab.setLabelText('Go To Current Dir')
+        self.htmlTextLab.setColor1('#ff0000')
+        self.htmlTextLab.setColor2('#00ff00')
+        self.htmlTextLab.setFontSize('13pt')
+        self.connect(self.htmlTextLab, SIGNAL('sigClicked(QString)'), self.slotClickHtmlTextLabel)
+
+        dustbinBut = MDustbinButton(5)
+        dustbinBut.setSize(30)
+        self.connect(dustbinBut, SIGNAL('sigClicked(int)'), self.slotDustbinClicked)
+        lay4 = QHBoxLayout()
+        lay4.addWidget(self.htmlTextLab)
+        lay4.addWidget(dustbinBut)
 
         mainLay = QVBoxLayout()
         mainLay.addLayout(lay1)
@@ -76,7 +83,7 @@ class MTestWindow(QWidget):
         mainLay.addWidget(MHSeparator())
         mainLay.addLayout(lay3)
         mainLay.addWidget(MHSeparator())
-        mainLay.addWidget(htmlTextLab)
+        mainLay.addLayout(lay4)
         
         self.setLayout(mainLay)
 
@@ -111,3 +118,6 @@ class MTestWindow(QWidget):
     def slotClickHtmlTextLabel(self, link):
         if os.path.isfile(link) or os.path.isdir(link):
             os.startfile(link)
+
+    def slotDustbinClicked(self, data):
+        self.htmlTextLab.setLabelText(self.htmlTextLab.getLabelText() + str(data))
