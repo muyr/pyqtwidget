@@ -16,7 +16,7 @@ except ImportError:
     from PyQt4.QtGui import *
 
 '''
-Class Name: MHtmlTextLabel
+Class Name: MPictureLabel
 Type      : QLabel
 
 
