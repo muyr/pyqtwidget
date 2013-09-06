@@ -76,6 +76,17 @@ class MTestWindow(QWidget):
         lay4.addWidget(self.htmlTextLab)
         lay4.addWidget(dustbinBut)
 
+        picLabel = MPictureLabel()
+        picLabel.setSize(120)
+        picLabel.setPicturePath('./images/key.png')
+        picLabel.setLink('./images/key.png')
+        picLabel.setBorderWidth(2)
+        picLabel.setBorderColor('#ff0000')
+        self.connect(picLabel, SIGNAL('sigClicked(QString)'), self.slotClickPictureLabel)
+
+        lay5 = QVBoxLayout()
+        lay5.addWidget(picLabel)
+
         mainLay = QVBoxLayout()
         mainLay.addLayout(lay1)
         mainLay.addWidget(MHSeparator())
@@ -84,7 +95,9 @@ class MTestWindow(QWidget):
         mainLay.addLayout(lay3)
         mainLay.addWidget(MHSeparator())
         mainLay.addLayout(lay4)
-        
+        mainLay.addWidget(MHSeparator())
+        mainLay.addLayout(lay5)
+
         self.setLayout(mainLay)
 
     def slotShowListWidgetDialog(self):
@@ -116,6 +129,11 @@ class MTestWindow(QWidget):
         self.textEdit.setDocument(QTextDocument(content))
 
     def slotClickHtmlTextLabel(self, link):
+        if os.path.isfile(link) or os.path.isdir(link):
+            os.startfile(link)
+
+    def slotClickPictureLabel(self, link):
+        link  = os.path.abspath(link)
         if os.path.isfile(link) or os.path.isdir(link):
             os.startfile(link)
 
