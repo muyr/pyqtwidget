@@ -13,3 +13,4 @@ from MFileWidget import *
 from MHtmlTextLabel import *
 from MPictureLabel import *
 from MDustbinButton import *
+from MMultiFileWidget import *

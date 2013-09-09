@@ -14,6 +14,7 @@ class MTestWindow(QWidget):
         self.initUI()
 
     def initUI(self):
+        # MHSperator  MVSeparator and MListWidgetDialog
         labelSepH = QLabel('MHSeparator:')
         labelSepV = QLabel('<-- MVSeparator')
         self.butMListWidgetDialog = QPushButton('MListWidgetDialog')
@@ -26,6 +27,7 @@ class MTestWindow(QWidget):
         lay1.addWidget(MVSeparator())
         lay1.addWidget(self.butMListWidgetDialog)
 
+        #  MTextEditDialog
         content = '''############################
 # Author: Mu yanru
 # Date  : 2013.08
@@ -41,12 +43,14 @@ class MTestWindow(QWidget):
         lay2.addWidget(self.textEdit)
         lay2.addWidget(butTextEditDialog)
 
+        # MFolderWidget
         folderLab = QLabel('FolderWidget:')
         folderWidget = MFolderWidget()
         folderWidget.setDialogTitle('FolderWidgetTitle')
         butClear = QPushButton('Clear')
         self.connect(butClear, SIGNAL('clicked(bool)'), folderWidget, SLOT('slotClear(bool)'))
 
+        # MFileWidget
         fileLab = QLabel('FileWidget:')
         fileWidget = MFileWidget()
         fileWidget.setDialogTitle('FileWidgetTitle')
@@ -61,6 +65,7 @@ class MTestWindow(QWidget):
         lay3.addWidget(fileWidget, 1, 1)
         lay3.addWidget(butClear2, 1, 2)
 
+        # MHtmlTextLabel
         self.htmlTextLab = MHtmlTextLabel()
         self.htmlTextLab.setLink('.')
         self.htmlTextLab.setLabelText('Go To Current Dir')
@@ -69,6 +74,7 @@ class MTestWindow(QWidget):
         self.htmlTextLab.setFontSize('13pt')
         self.connect(self.htmlTextLab, SIGNAL('sigClicked(QString)'), self.slotClickHtmlTextLabel)
 
+        # MDustbinButton
         dustbinBut = MDustbinButton(5)
         dustbinBut.setSize(30)
         self.connect(dustbinBut, SIGNAL('sigClicked(int)'), self.slotDustbinClicked)
@@ -76,6 +82,7 @@ class MTestWindow(QWidget):
         lay4.addWidget(self.htmlTextLab)
         lay4.addWidget(dustbinBut)
 
+        # MPictureLabel
         picLabel = MPictureLabel()
         picLabel.setSize(120)
         picLabel.setPicturePath('./images/key.png')
@@ -84,8 +91,17 @@ class MTestWindow(QWidget):
         picLabel.setBorderColor('#ff0000')
         self.connect(picLabel, SIGNAL('sigClicked(QString)'), self.slotClickPictureLabel)
 
+        # MMultiFileWidget
+        self.multiFileWidget = MMultiFileWidget()
+        self.connect(self.multiFileWidget, SIGNAL('sigFileListChanged(QStringList)'), self.slotFileListChanged)
+        self.multiTextEdit = QTextEdit()
+        self.multiTextEdit.setReadOnly(True)
+
         lay5 = QVBoxLayout()
         lay5.addWidget(picLabel)
+        lay5.addWidget(MHSeparator())
+        lay5.addWidget(self.multiFileWidget)
+        lay5.addWidget(self.multiTextEdit)
 
         mainLay = QVBoxLayout()
         mainLay.addLayout(lay1)
@@ -139,3 +155,7 @@ class MTestWindow(QWidget):
 
     def slotDustbinClicked(self, data):
         self.htmlTextLab.setLabelText(self.htmlTextLab.getLabelText() + str(data))
+
+    def slotFileListChanged(self, fileList):
+        content = '\n'.join(fileList)
+        self.multiTextEdit.setDocument(QTextDocument(content))
