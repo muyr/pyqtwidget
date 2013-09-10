@@ -14,3 +14,5 @@ from MHtmlTextLabel import *
 from MPictureLabel import *
 from MDustbinButton import *
 from MMultiFileWidget import *
+from MMultiControlWidget import *
+from MMultiTabWidget import *

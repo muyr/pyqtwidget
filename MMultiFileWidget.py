@@ -40,7 +40,6 @@ class MMultiFileWidget(QWidget):
         self.dataDict = {}
         self.dialogTitle = ('渲染效果图:').decode('gbk')
         self.fileFilter = 'Image File(*.png *.jpg *.jpeg *.bmp)'
-        self.groupTitle = 'MMultiFileWidget'
 
         self.addPictureButton = QPushButton(('添加（可一次选中多个）...').decode('gbk'))
         self.addPictureButton.setFixedHeight(30)
@@ -60,7 +59,7 @@ class MMultiFileWidget(QWidget):
         self.previewLay.addLayout(buttLay, 0, 1)
 
         self.basicGrpBox = QGroupBox()
-        self.basicGrpBox.setTitle(self.groupTitle.decode('gbk'))
+        self.basicGrpBox.setTitle('MMultiFileWidget')
         self.basicGrpBox.setLayout(self.previewLay)
 
         mainLay = QVBoxLayout()
@@ -127,4 +126,4 @@ class MMultiFileWidget(QWidget):
         self.fileFilter = filter
 
     def setGroupTitle(self, text):
-        self.groupTitle = text
+        self.basicGrpBox.setTitle(text)
