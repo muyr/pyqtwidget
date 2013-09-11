@@ -156,6 +156,3 @@ class MTestWindow(QWidget):
     def slotDustbinClicked(self, data):
         self.htmlTextLab.setLabelText(self.htmlTextLab.getLabelText() + str(data))
 
-    def slotFileListChanged(self, fileList):
-        content = '\n'.join(fileList)
-        self.multiTextEdit.setDocument(QTextDocument(content))
