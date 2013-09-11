@@ -27,8 +27,8 @@ Type      : QWidget
 
 Public Method:
     void setLabel(QString)
-    int  getCount()
-    void slotDecrease()
+    void setCount(int)
+    int  count()
 
 Public Signal:
     void sigAdd()
@@ -42,7 +42,7 @@ class MMultiControlWidget(QWidget):
 
         self.numLab = QLabel(name)
 
-        self.numLineEdit = QLineEdit('1')
+        self.numLineEdit = QLineEdit('0')
         self.numLineEdit.setReadOnly(True)
         self.numLineEdit.setFixedSize(40, 24)
         self.connect(self.numLineEdit, SIGNAL('textChanged(QString)'), self.slotChangeNum)
@@ -56,9 +56,11 @@ class MMultiControlWidget(QWidget):
         self.removeButton.setIcon(QIcon('./images/remove.png'))
         self.removeButton.setIconSize(QSize(20, 20))
         self.removeButton.setFixedSize(24, 24)
+        self.removeButton.setEnabled(False)
 
         self.cleanAllButton = QPushButton(('Çå³ýËùÓÐ').decode('gbk'))
         self.cleanAllButton.setFixedSize(80, 24)
+        self.cleanAllButton.setEnabled(False)
 
         self.connect(self.addButton, SIGNAL('clicked()'), self.slotAdd)
         self.connect(self.removeButton, SIGNAL('clicked()'), self.slotRemove)
@@ -80,17 +82,17 @@ class MMultiControlWidget(QWidget):
     def setLabel(self, text):
         self.numLab.setText(text)
 
-    def getCount(self):
+    def count(self):
         return int(self.numLineEdit.text())
 
     def setCount(self, count):
         self.numLineEdit.setText(str(count))
 
     def slotDecrease(self):
-        self.setCount(self.getCount() - 1)
+        self.setCount(self.count() - 1)
 
     def slotIncrease(self):
-        self.setCount(self.getCount() + 1)
+        self.setCount(self.count() + 1)
 
     def slotAdd(self):
         self.slotIncrease()

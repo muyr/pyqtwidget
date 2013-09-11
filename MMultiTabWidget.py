@@ -35,17 +35,16 @@ Type      : QWidget
 +------------------------------------------+
 
 Public Method:
-    void                setGroupTitle(QString)
-    int                 setTemplateWidget(QWidget)
-    MMultiControlWidget getControlWidget()
-    QWidgetList         getWidgetList()
+    void        setGroupTitle(QString)
+    void        setTemplateWidget(QWidget)
+    QWidgetList getWidgetList()
 
 Public Signal:
-    void sigDecrease()
+    void sigNumChanged()
 '''
 
 class MMultiTabWidget(QWidget):
-    def __init__(self, widget, parent = None):
+    def __init__(self, widget = None, parent = None):
         super(MMultiTabWidget, self).__init__(parent)
         self.setTemplateWidget(widget)
         self.dataDict = {}
@@ -54,7 +53,7 @@ class MMultiTabWidget(QWidget):
         self.connect(self.controlWidget, SIGNAL('sigAdd()'), self.slotAdd)
         self.connect(self.controlWidget, SIGNAL('sigRemove()'), self.slotRemove)
         self.connect(self.controlWidget, SIGNAL('sigCleanAll()'), self.slotCleanAll)
-        self.connect(self, SIGNAL('sigDecrease()'), self.controlWidget.slotDecrease)
+        self.connect(self, SIGNAL('sigNumChanged(int)'), self.controlWidget.setCount)
 
         self.closeTabButton = QToolButton(self)
         self.closeTabButton.setAutoRaise(True)
@@ -77,27 +76,27 @@ class MMultiTabWidget(QWidget):
         mainLay.addWidget(self.basicGrpBox)
 
         self.setLayout(mainLay)
-        self.slotAdd()
 
     def setGroupTitle(self, text):
         self.basicGrpBox.setTitle(text)
 
     def setTemplateWidget(self, className):
-        self.widgetClass = className
-
-    def getControlWidget(self):
-        return self.controlWidget
+        if className:
+            self.widgetClass = className
+        else:
+            self.widgetClass = QLabel
 
     def slotAdd(self):
         newIndex = self.tabWidget.count() + 1
         templateWidget = self.widgetClass()
         self.tabWidget.addTab(templateWidget, str(newIndex))
         self.dataDict[newIndex] = templateWidget
+        self.emit(SIGNAL('sigNumChanged(int)'), self.tabWidget.count())
 
     def slotRemove(self):
         lastIndex = self.tabWidget.count() - 1
         self.tabWidget.removeTab(lastIndex)
-        self.dataDict.pop(lastIndex)
+        self.dataDict.pop(lastIndex + 1)
 
     def slotCleanAll(self):
         self.tabWidget.clear()
@@ -114,7 +113,7 @@ class MMultiTabWidget(QWidget):
         for i in range(0, self.tabWidget.count()):
             self.tabWidget.setTabText(i, str(i + 1))
             self.dataDict[i + 1] = tempDict.get(keys[i])
-        self.emit(SIGNAL('sigDecrease()'))
+        self.emit(SIGNAL('sigNumChanged(int)'), self.tabWidget.count())
 
     def getWidgetList(self):
         resultList = []

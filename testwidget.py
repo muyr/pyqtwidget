@@ -103,10 +103,6 @@ class MTestWindow(QWidget):
         lay5.addWidget(self.multiFileWidget)
         lay5.addWidget(self.multiTextEdit)
 
-        # MMultiTabWidget
-        multiTabWidget = MMultiTabWidget(MMultiFileWidget)
-        multiTabWidget.setGroupTitle('Test')
-
         mainLay = QVBoxLayout()
         mainLay.addLayout(lay1)
         mainLay.addWidget(MHSeparator())
@@ -117,7 +113,6 @@ class MTestWindow(QWidget):
         mainLay.addLayout(lay4)
         mainLay.addWidget(MHSeparator())
         mainLay.addLayout(lay5)
-        mainLay.addWidget(multiTabWidget)
 
         self.setLayout(mainLay)
 
