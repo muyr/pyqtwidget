@@ -20,6 +20,9 @@ except ImportError:
 Class Name: MHtmlTextLabel
 Type      : QLabel
 
++-----------------------------+
+|   __H_T_M_L_L_a_b_e_l___    +
++-----------------------------+
 
 Public Method:
     void    setLink(QString)

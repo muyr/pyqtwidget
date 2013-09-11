@@ -16,3 +16,4 @@ from MDustbinButton import *
 from MMultiFileWidget import *
 from MMultiControlWidget import *
 from MMultiTabWidget import *
+from MTMallPicWidget import *

@@ -19,6 +19,15 @@ except ImportError:
 Class Name: MPictureLabel
 Type      : QLabel
 
++-----------------+
+| +-------------+ |
+| |             | |
+| |             | |
+| |   Picture   | |
+| |             | |
+| |             | |
+| +-------------+ |
++-----------------+
 
 Public Method:
     void    setLink(QString)

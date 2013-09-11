@@ -19,6 +19,12 @@ except ImportError:
 Class Name: MMultiControlWidget
 Type      : QWidget
 
++------------------------------------------+
+| +--------+ +-----+ +---+ +---+ +-------+ |
+| | Label: | |   3 | | + | | - | | Clear | |
+| +--------+ +-----+ +---+ +---+ +-------+ |
++------------------------------------------+
+
 Public Method:
     void setLabel(QString)
     int  getCount()

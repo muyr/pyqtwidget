@@ -21,6 +21,19 @@ from MMultiControlWidget import *
 Class Name: MMultiTabWidget
 Type      : QWidget
 
++---GroupTitle-----------------------------+
+| +--------+ +-----+ +---+ +---+ +-------+ |
+| | Label: | |   3 | | + | | - | | Clear | |
+| +--------+ +-----+ +---+ +---+ +-------+ |
+| +---++---++---+                    +---+ |
+| | 1 || 2 || 3 |                    | x | |
+| |   +----------------------------+---+-| |
+| |                                      | |
+| |          Your Widget                 | |
+| |                                      | |
+| +--------------------------------------+ |
++------------------------------------------+
+
 Public Method:
     void                setGroupTitle(QString)
     int                 setTemplateWidget(QWidget)
@@ -60,6 +73,7 @@ class MMultiTabWidget(QWidget):
         self.basicGrpBox.setLayout(widgetLay)
 
         mainLay = QVBoxLayout()
+        mainLay.setContentsMargins(0, 0, 0, 0)
         mainLay.addWidget(self.basicGrpBox)
 
         self.setLayout(mainLay)
