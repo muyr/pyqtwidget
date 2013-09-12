@@ -40,7 +40,7 @@ Public Method:
     QWidgetList getWidgetList()
 
 Public Signal:
-    void sigNumChanged()
+    void sigNumChanged(int)
 '''
 
 class MMultiTabWidget(QWidget):

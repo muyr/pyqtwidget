@@ -17,15 +17,11 @@ class MTestWindow(QWidget):
         # MHSperator  MVSeparator and MListWidgetDialog
         labelSepH = QLabel('MHSeparator:')
         labelSepV = QLabel('<-- MVSeparator')
-        self.butMListWidgetDialog = QPushButton('MListWidgetDialog')
-        self.connect(self.butMListWidgetDialog, SIGNAL('clicked()'), self.slotShowListWidgetDialog)
 
         lay1 = QHBoxLayout()
         lay1.addWidget(labelSepH)
         lay1.addWidget(MVSeparator())
         lay1.addWidget(labelSepV)
-        lay1.addWidget(MVSeparator())
-        lay1.addWidget(self.butMListWidgetDialog)
 
         #  MTextEditDialog
         content = '''############################
@@ -91,17 +87,10 @@ class MTestWindow(QWidget):
         picLabel.setBorderColor('#ff0000')
         self.connect(picLabel, SIGNAL('sigClicked(QString)'), self.slotClickPictureLabel)
 
-        # MMultiFileWidget
-        self.multiFileWidget = MMultiFileWidget()
-        self.connect(self.multiFileWidget, SIGNAL('sigFileListChanged(QStringList)'), self.slotFileListChanged)
-        self.multiTextEdit = QTextEdit()
-        self.multiTextEdit.setReadOnly(True)
-
         lay5 = QVBoxLayout()
         lay5.addWidget(picLabel)
         lay5.addWidget(MHSeparator())
-        lay5.addWidget(self.multiFileWidget)
-        lay5.addWidget(self.multiTextEdit)
+
 
         mainLay = QVBoxLayout()
         mainLay.addLayout(lay1)
@@ -116,22 +105,6 @@ class MTestWindow(QWidget):
 
         self.setLayout(mainLay)
 
-    def slotShowListWidgetDialog(self):
-        testList = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri']
-        dialog = MListWidgetDialog(testList, self)
-        dialog.setMultiSelectionMode()
-        dialog.setDialogTitle('Work Day')
-        dialog.setLabel('Ask for leave:')
-        self.connect(dialog, SIGNAL('sigSelectedItemTextList(QStringList)'), self.slotChangeButtonText)
-        dialog.exec_()
-
-    def slotChangeButtonText(self, testList):
-        content = ''
-        for i in range(len(testList)):
-            if not i: content = testList[i] 
-            else: content = content + ',' + testList[i]
-
-        self.butMListWidgetDialog.setText(content)
 
     def slotShowTextEditDialog(self):
         dialog = MTextEditDialog()
