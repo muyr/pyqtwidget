@@ -35,10 +35,9 @@ Type      : QDialog
  | +-------+  +--------+ |
  +-----------------------+
 Public Method:
-    void    setTextContent(QString)
-    QString getTextContent()
-    void    setDialogTitle(QString)
-    void    setLabel(QString)
+    void setTextContent(QString)
+    void setDialogTitle(QString)
+    void setLabel(QString)
 
 Public Signal:
     sigDocumentModifed(QString)
