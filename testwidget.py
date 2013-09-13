@@ -31,20 +31,10 @@ class MTestWindow(QWidget):
         butClear = QPushButton('Clear')
         self.connect(butClear, SIGNAL('clicked(bool)'), folderWidget, SLOT('slotClear(bool)'))
 
-        # MFileWidget
-        fileLab = QLabel('FileWidget:')
-        fileWidget = MFileWidget()
-        fileWidget.setDialogTitle('FileWidgetTitle')
-        fileWidget.setFileFilter('ImageFile(*.png *jpg *bmp *tiff);;All Files(*)')
-        butClear2 = QPushButton('Clear')
-        self.connect(butClear2, SIGNAL('clicked(bool)'), fileWidget, SLOT('slotClear(bool)'))
         lay3 = QGridLayout()
         lay3.addWidget(folderLab, 0, 0)
         lay3.addWidget(folderWidget, 0, 1)
         lay3.addWidget(butClear, 0, 2)
-        lay3.addWidget(fileLab, 1, 0)
-        lay3.addWidget(fileWidget, 1, 1)
-        lay3.addWidget(butClear2, 1, 2)
 
         # MHtmlTextLabel
         self.htmlTextLab = MHtmlTextLabel()

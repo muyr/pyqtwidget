@@ -14,8 +14,9 @@ except ImportError:
     sip.setapi("QVariant",  2)
     from PyQt4.QtCore import *
     from PyQt4.QtGui import *
+
 import os
-from MTool import *
+
 '''
 Class Name: MFileWidget
 Type      : QWidget
@@ -84,17 +85,19 @@ class MFileWidget(QWidget):
 
     def slotViewFile(self):
         try:
-            os.startfile(self.text())
+            os.startfile(os.path.abspath(self.text()))
         except:
             pass
 
     def slotViewDir(self):
-        openDir(self.text())
-        resultName = dirName
+        resultName = self.text()
         # dirName is a file
-        if os.path.isfile(dirName):
-            resultName = os.path.dirname(dirName)
-        os.startfile(resultName)
+        if os.path.isfile(self.text()):
+            resultName = os.path.dirname(self.text())
+        try:
+            os.startfile(os.path.abspath(resultName))
+        except:
+            pass
 
     def setDialogTitle(self, title):
         self.dialogTitle = title
