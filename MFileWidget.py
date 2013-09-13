@@ -27,14 +27,10 @@ Type      : QWidget
 +-----------------------------------------------------+
 
 Public Method:
-    void    clear()
     void    setDialogTitle(QString)
     void    setFileFilter(QString)
-    QString text()
     void    setText(QString)
-
-Public Slot:
-    void    slotClear(bool)
+    QString text()
 '''
 
 
@@ -87,10 +83,18 @@ class MFileWidget(QWidget):
             QMessageBox.warning(self, 'Warning', 'File doesn\'t exist!')
 
     def slotViewFile(self):
-        openFile(self.text())
+        try:
+            os.startfile(self.text())
+        except:
+            pass
 
     def slotViewDir(self):
         openDir(self.text())
+        resultName = dirName
+        # dirName is a file
+        if os.path.isfile(dirName):
+            resultName = os.path.dirname(dirName)
+        os.startfile(resultName)
 
     def setDialogTitle(self, title):
         self.dialogTitle = title

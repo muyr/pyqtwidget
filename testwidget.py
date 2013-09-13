@@ -23,21 +23,6 @@ class MTestWindow(QWidget):
         lay1.addWidget(MVSeparator())
         lay1.addWidget(labelSepV)
 
-        #  MTextEditDialog
-        content = '''############################
-# Author: Mu yanru
-# Date  : 2013.08
-# Email : muyanru345@163.com
-############################'''
-        self.textEdit = QTextEdit('')
-        self.textEdit.setDocument(QTextDocument(content))
-        self.textEdit.setReadOnly(True)
-        butTextEditDialog = QPushButton('Modify')
-        self.connect(butTextEditDialog, SIGNAL('clicked()'), self.slotShowTextEditDialog)
-
-        lay2 = QHBoxLayout()
-        lay2.addWidget(self.textEdit)
-        lay2.addWidget(butTextEditDialog)
 
         # MFolderWidget
         folderLab = QLabel('FolderWidget:')
@@ -78,51 +63,16 @@ class MTestWindow(QWidget):
         lay4.addWidget(self.htmlTextLab)
         lay4.addWidget(dustbinBut)
 
-        # MPictureLabel
-        picLabel = MPictureLabel()
-        picLabel.setSize(120)
-        picLabel.setPicturePath('./images/key.png')
-        picLabel.setLink('./images/key.png')
-        picLabel.setBorderWidth(2)
-        picLabel.setBorderColor('#ff0000')
-        self.connect(picLabel, SIGNAL('sigClicked(QString)'), self.slotClickPictureLabel)
-
-        lay5 = QVBoxLayout()
-        lay5.addWidget(picLabel)
-        lay5.addWidget(MHSeparator())
-
-
         mainLay = QVBoxLayout()
         mainLay.addLayout(lay1)
-        mainLay.addWidget(MHSeparator())
-        mainLay.addLayout(lay2)
         mainLay.addWidget(MHSeparator())
         mainLay.addLayout(lay3)
         mainLay.addWidget(MHSeparator())
         mainLay.addLayout(lay4)
-        mainLay.addWidget(MHSeparator())
-        mainLay.addLayout(lay5)
 
         self.setLayout(mainLay)
 
-
-    def slotShowTextEditDialog(self):
-        dialog = MTextEditDialog()
-        dialog.setTextContent(self.textEdit.document().toPlainText())
-        dialog.setDialogTitle('Modify')
-        dialog.setLabel('Information:')
-        self.connect(dialog, SIGNAL('sigDocumentModifed(QString)'), self.slotChangeTextEditContent)
-        dialog.exec_()
-
-    def slotChangeTextEditContent(self, content):
-        self.textEdit.setDocument(QTextDocument(content))
-
     def slotClickHtmlTextLabel(self, link):
-        if os.path.isfile(link) or os.path.isdir(link):
-            os.startfile(link)
-
-    def slotClickPictureLabel(self, link):
-        link  = os.path.abspath(link)
         if os.path.isfile(link) or os.path.isdir(link):
             os.startfile(link)
 

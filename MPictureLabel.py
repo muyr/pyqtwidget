@@ -38,7 +38,6 @@ Public Method:
 
     QString getLink()
     QString getPicturePath()
-    int     getSize()
 
 Public Signal:
     void    sigClicked(QString)
@@ -83,9 +82,6 @@ class MPictureLabel(QLabel):
         self.setStyleSheet('border-width:' + str(self.borderWidth) + 'px;'
                            + 'border-color:' + self.borderColor + ';'
                            + 'border-style: solid; ')
-
-    def getSize(self):
-        return self.size
 
     def getLink(self):
         return self.link
