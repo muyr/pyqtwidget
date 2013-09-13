@@ -55,27 +55,17 @@ class MTestWindow(QWidget):
         self.htmlTextLab.setFontSize('13pt')
         self.connect(self.htmlTextLab, SIGNAL('sigClicked(QString)'), self.slotClickHtmlTextLabel)
 
-        # MDustbinButton
-        dustbinBut = MDustbinButton(5)
-        dustbinBut.setSize(30)
-        self.connect(dustbinBut, SIGNAL('sigClicked(int)'), self.slotDustbinClicked)
-        lay4 = QHBoxLayout()
-        lay4.addWidget(self.htmlTextLab)
-        lay4.addWidget(dustbinBut)
 
         mainLay = QVBoxLayout()
         mainLay.addLayout(lay1)
         mainLay.addWidget(MHSeparator())
         mainLay.addLayout(lay3)
         mainLay.addWidget(MHSeparator())
-        mainLay.addLayout(lay4)
+        mainLay.addWidget(self.htmlTextLab)
 
         self.setLayout(mainLay)
 
     def slotClickHtmlTextLabel(self, link):
         if os.path.isfile(link) or os.path.isdir(link):
             os.startfile(link)
-
-    def slotDustbinClicked(self, data):
-        self.htmlTextLab.setLabelText(self.htmlTextLab.getLabelText() + str(data))
 

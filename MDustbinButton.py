@@ -21,22 +21,30 @@ Class Name: MDustbinButton
 Type      : QToolButton
 
 Public Method:
-    void    setSize(int, int)
+    void setSize(int)
+    void setData(int)
+    int  data()
 
 Public Signal:
-    void    sigClicked(int)
+    void sigClicked(int)
 '''
 class MDustbinButton(QToolButton):
     def __init__(self, data = 0, parent = None):
         super(MDustbinButton, self).__init__(parent)
-        self.data = data
+        self.setData(data)
         self.setToolTip('Remove')
         self.setAutoRaise(True)
         self.setIcon(QIcon('./images/dustbin.png'))
         self.connect(self, SIGNAL('clicked()'), self.slotEmitDelete)
 
     def slotEmitDelete(self):
-        self.emit(SIGNAL('sigClicked(int)'), self.data)
+        self.emit(SIGNAL('sigClicked(int)'), self.stateData)
+
+    def setData(self, data):
+        self.stateData = data
+
+    def data(self):
+        return self.stateData
 
     def setSize(self, w):
         self.setFixedSize(QSize(w, w))
