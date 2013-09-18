@@ -14,6 +14,6 @@ from MHtmlTextLabel_test import *
 from MPictureLabel_test import *
 from MDustbinButton_test import *
 from MMultiFileWidget_test import *
-#from MMultiControlWidget_test import *
+from MMultiControlWidget_test import *
 from MMultiTabWidget_test import *
 from MTMallPicWidget_test import *

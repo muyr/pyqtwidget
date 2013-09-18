@@ -17,7 +17,7 @@ classDict = {
             'MPictureLabel':MPictureLabelTest,
             'MDustbinButton':MDustbinButtonTest,
             'MMultiFileWidget':MMultiFileWidgetTest,
-            #'MMultiControlWidget':MMultiControlWidgetTest,
+            'MMultiControlWidget':MMultiControlWidgetTest,
             'MMultiTabWidget':MMultiTabWidgetTest,
             'MTMallPicWidget':MTMallPicWidgetTest
             }
