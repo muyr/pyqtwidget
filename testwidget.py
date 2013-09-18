@@ -23,19 +23,6 @@ class MTestWindow(QWidget):
         lay1.addWidget(MVSeparator())
         lay1.addWidget(labelSepV)
 
-
-        # MFolderWidget
-        folderLab = QLabel('FolderWidget:')
-        folderWidget = MFolderWidget()
-        folderWidget.setDialogTitle('FolderWidgetTitle')
-        butClear = QPushButton('Clear')
-        self.connect(butClear, SIGNAL('clicked(bool)'), folderWidget, SLOT('slotClear(bool)'))
-
-        lay3 = QGridLayout()
-        lay3.addWidget(folderLab, 0, 0)
-        lay3.addWidget(folderWidget, 0, 1)
-        lay3.addWidget(butClear, 0, 2)
-
         # MHtmlTextLabel
         self.htmlTextLab = MHtmlTextLabel()
         self.htmlTextLab.setLink('.')
@@ -48,8 +35,6 @@ class MTestWindow(QWidget):
 
         mainLay = QVBoxLayout()
         mainLay.addLayout(lay1)
-        mainLay.addWidget(MHSeparator())
-        mainLay.addLayout(lay3)
         mainLay.addWidget(MHSeparator())
         mainLay.addWidget(self.htmlTextLab)
 

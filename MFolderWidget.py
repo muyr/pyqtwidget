@@ -26,13 +26,9 @@ Type      : QWidget
  +--------------------+ +------+ +--------+ 
 
 Public Method:
-    void    clear()
     void    setDialogTitle(QString)
     QString text()
     void    setText(QString)
-
-Public Slot:
-    void    slotClear(bool)
 '''
 
 class MFolderWidget(QWidget):
@@ -76,9 +72,6 @@ class MFolderWidget(QWidget):
 
     def setDialogTitle(self, title):
         self.dialogTitle = title
-
-    def slotClear(self, flag):
-        self.lineEdit.setText('')
 
     def text(self):
         return self.lineEdit.text()
