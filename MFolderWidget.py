@@ -14,8 +14,8 @@ except ImportError:
     sip.setapi("QVariant",  2)
     from PyQt4.QtCore import *
     from PyQt4.QtGui import *
+
 import os
-from MTool import *
 
 '''
 Class Name: MFolderWidget
@@ -64,7 +64,10 @@ class MFolderWidget(QWidget):
             self.lineEdit.setText(file)
 
     def slotViewFile(self):
-        openFile(self.text())
+        try:
+            os.startfile(self.text())
+        except:
+            pass
 
     def slotTextChanged(self):
         if not os.path.isdir(self.text()):
