@@ -14,18 +14,9 @@ class MTestWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        # MHSperator  MVSeparator and MListWidgetDialog
-        labelSepH = QLabel('MHSeparator:')
-        labelSepV = QLabel('<-- MVSeparator')
 
-        lay1 = QHBoxLayout()
-        lay1.addWidget(labelSepH)
-        lay1.addWidget(MVSeparator())
-        lay1.addWidget(labelSepV)
 
         mainLay = QVBoxLayout()
-        mainLay.addLayout(lay1)
-        mainLay.addWidget(MHSeparator())
 
         self.setLayout(mainLay)
 
