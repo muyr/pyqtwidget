@@ -53,14 +53,14 @@ class MMultiFileWidget(QWidget):
         super(MMultiFileWidget, self).__init__(parent)
 
         self.dataDict = {}
-        self.dialogTitle = ('渲染效果图:').decode('gbk')
+        self.dialogTitle = 'Render Picuture'
         self.fileFilter = 'Image File(*.png *.jpg *.jpeg *.bmp)'
 
-        self.addPictureButton = QPushButton(('添加（可一次选中多个）...').decode('gbk'))
+        self.addPictureButton = QPushButton('Add...')
         self.addPictureButton.setFixedHeight(30)
         self.connect(self.addPictureButton, SIGNAL('clicked()'), self.slotAddPic)
 
-        self.removeAllButton = QPushButton(('清除所有').decode('gbk'))
+        self.removeAllButton = QPushButton('Clear All')
         self.removeAllButton.setFixedWidth(100)
         self.removeAllButton.setFixedHeight(30)
         self.removeAllButton.setEnabled(False)
