@@ -57,7 +57,7 @@ class MMultiTabWidget(QWidget):
 
         self.closeTabButton = QToolButton(self)
         self.closeTabButton.setAutoRaise(True)
-        self.closeTabButton.setToolTip(('πÿ±’±Í«©').decode('gbk'))
+        self.closeTabButton.setToolTip('Close Tab')
         self.closeTabButton.setIcon(QIcon('./images/closetab.png'))
         self.connect(self.closeTabButton, SIGNAL('clicked()'), self.slotCloseTab)
 

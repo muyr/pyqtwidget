@@ -58,7 +58,7 @@ class MMultiControlWidget(QWidget):
         self.removeButton.setFixedSize(24, 24)
         self.removeButton.setEnabled(False)
 
-        self.cleanAllButton = QPushButton(('Çå³ýËùÓÐ').decode('gbk'))
+        self.cleanAllButton = QPushButton('Clear All')
         self.cleanAllButton.setFixedSize(80, 24)
         self.cleanAllButton.setEnabled(False)
 
